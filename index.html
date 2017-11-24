@@ -30,6 +30,7 @@
 
         game.physics.enable(ball, Phaser.Physics.ARCADE);
         game.physics.enable(paddle, Phaser.Physics.ARCADE);
+        game.physics.arcade.checkCollision.down = false;
 
         ball.anchor.set(0.5);
         ball.body.velocity.set(150, -150);
@@ -39,6 +40,13 @@
         paddle.anchor.set(0.5,1);
         paddle.body.immovable = true;
         // ball.body.gravity.y = 700;
+
+        ball.checkWorldBounds = true;
+        ball.events.onOutOfBounds.add(function(){
+            alert('Game over!');
+            location.reload();
+        }, this);
+
     }
     function update() {
         game.physics.arcade.collide(ball, paddle);
