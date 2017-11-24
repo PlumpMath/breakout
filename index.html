@@ -17,6 +17,8 @@
     var bricks;
     var newBrick;
     var brickInfo;
+    var scoreText;
+    var score = 0;
 
     function preload() {
         game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
@@ -31,6 +33,8 @@
         game.physics.startSystem(Phaser.Physics.ARCADE);
         ball = game.add.sprite(game.world.width*0.5, game.world.height - 25, 'ball');
         paddle = game.add.sprite(game.world.width*0.5, game.world.height-5, 'paddle');
+
+        scoreText = game.add.text(5, 5, 'Points: 0', { font: '18px Arial', fill: '#0095DD' });
 
         game.physics.enable(ball, Phaser.Physics.ARCADE);
         game.physics.enable(paddle, Phaser.Physics.ARCADE);
@@ -87,6 +91,8 @@
     }
     function ballHitBrick(ball, brick) {
         brick.kill();
+        score += 10;
+        scoreText.setText('Points: '+score);
     }
 </script>
 </body>
